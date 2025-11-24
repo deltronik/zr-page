@@ -1,0 +1,4 @@
+.env
+*.md
+*.sh
+node_modules

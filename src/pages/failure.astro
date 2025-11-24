@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Pago Rechazado - Zenta Running</title>
+	</head>
+	<body>
+		<main>
+			<div class="container">
+				<div class="card fade-in" style="text-align: center;">
+					<div style="font-size: 4rem; margin-bottom: 1rem;">❌</div>
+					<h1>Pago Rechazado</h1>
+					<p style="font-size: 1.2rem; margin-bottom: 2rem;">
+						Hubo un problema al procesar tu pago
+					</p>
+
+					<div class="alert alert-error" style="text-align: left;">
+						<strong>¿Qué puedes hacer?</strong>
+						<ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+							<li>Verifica que tu tarjeta tenga fondos suficientes</li>
+							<li>Asegúrate de que los datos sean correctos</li>
+							<li>Intenta con otro medio de pago</li>
+							<li>Contacta a tu banco si el problema persiste</li>
+						</ul>
+					</div>
+
+					<div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center;">
+						<a href="/inscripcion" class="btn btn-primary" style="text-decoration: none;">
+							Intentar nuevamente
+						</a>
+						<a href="mailto:contacto@zentarunning.com" class="btn" style="text-decoration: none; background: rgba(255, 255, 255, 0.1);">
+							Contactar soporte
+						</a>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

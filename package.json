@@ -1,0 +1,32 @@
+{
+  "name": "zentarunning",
+  "version": "1.0.0",
+  "description": "Sitio de inscripción para Zenta Running - Carreras 3km y 10km",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.1.0",
+    "@astrojs/vercel": "^8.2.1",
+    "@libsql/client": "^0.14.0",
+    "astro": "^5.16.0",
+    "dotenv": "^16.4.7",
+    "mercadopago": "^2.0.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TU-USUARIO/zenta-running.git"
+  },
+  "keywords": [
+    "running",
+    "inscripcion",
+    "mercadopago",
+    "turso"
+  ],
+  "author": "",
+  "license": "MIT"
+}

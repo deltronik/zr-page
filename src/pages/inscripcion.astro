@@ -1,0 +1,339 @@
+---
+import "../styles/global.css";
+import { initializeTables } from "../lib/db.js";
+
+await initializeTables();
+---
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <meta
+            name="description"
+            content="Inscripción para Zenta Running - Carreras de 3km y 10km"
+        />
+        <title>Zenta Running - Inscripción</title>
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <div class="card fade-in">
+                    <h1>🏃‍♂️ Zenta Running</h1>
+                    <p
+                        style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;"
+                    >
+                        Inscribite a nuestra carrera y viví la experiencia
+                        running
+                    </p>
+
+                    <form id="inscripcionForm">
+                        <div class="form-group">
+                            <label for="nombre_apellido">
+                                Nombre y Apellido <span
+                                    style="color: var(--primary);">*</span
+                                >
+                            </label>
+                            <input
+                                type="text"
+                                id="nombre_apellido"
+                                name="nombre_apellido"
+                                required
+                                placeholder="Ej: Juan Pérez"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dni">
+                                DNI <span style="color: var(--primary);">*</span
+                                >
+                            </label>
+                            <input
+                                type="text"
+                                id="dni"
+                                name="dni"
+                                required
+                                pattern="[0-9]{7,8}"
+                                placeholder="Ej: 12345678"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Sexo <span style="color: var(--primary);"
+                                    >*</span
+                                >
+                            </label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input
+                                        type="radio"
+                                        id="sexo_masculino"
+                                        name="sexo"
+                                        value="masculino"
+                                        required
+                                    />
+                                    <label
+                                        for="sexo_masculino"
+                                        class="radio-label"
+                                    >
+                                        Masculino
+                                    </label>
+                                </div>
+                                <div class="radio-option">
+                                    <input
+                                        type="radio"
+                                        id="sexo_femenino"
+                                        name="sexo"
+                                        value="femenino"
+                                        required
+                                    />
+                                    <label
+                                        for="sexo_femenino"
+                                        class="radio-label"
+                                    >
+                                        Femenino
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha_nacimiento">
+                                Fecha de Nacimiento <span
+                                    style="color: var(--primary);">*</span
+                                >
+                            </label>
+                            <input
+                                type="date"
+                                id="fecha_nacimiento"
+                                name="fecha_nacimiento"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">
+                                Edad <span style="color: var(--primary);"
+                                    >*</span
+                                >
+                            </label>
+                            <input
+                                type="number"
+                                id="edad"
+                                name="edad"
+                                required
+                                min="1"
+                                max="120"
+                                placeholder="Se calculará automáticamente"
+                                readonly
+                                style="background: rgba(255, 255, 255, 0.03); cursor: not-allowed;"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="team">
+                                Team / Equipo <span
+                                    style="color: var(--text-muted); font-weight: 400;"
+                                    >(opcional)</span
+                                >
+                            </label>
+                            <input
+                                type="text"
+                                id="team"
+                                name="team"
+                                placeholder="Ej: Runners Club"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ciudad">
+                                Ciudad <span style="color: var(--primary);"
+                                    >*</span
+                                >
+                            </label>
+                            <input
+                                type="text"
+                                id="ciudad"
+                                name="ciudad"
+                                required
+                                placeholder="Ej: Buenos Aires"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Distancia <span style="color: var(--primary);"
+                                    >*</span
+                                >
+                            </label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input
+                                        type="radio"
+                                        id="distancia_3km"
+                                        name="distancia"
+                                        value="3km"
+                                        required
+                                        checked
+                                    />
+                                    <label
+                                        for="distancia_3km"
+                                        class="radio-label"
+                                    >
+                                        3 KM
+                                        <div
+                                            style="font-size: 0.875rem; margin-top: 0.25rem; opacity: 0.8;"
+                                        >
+                                            $5.000
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="radio-option">
+                                    <input
+                                        type="radio"
+                                        id="distancia_10km"
+                                        name="distancia"
+                                        value="10km"
+                                        required
+                                    />
+                                    <label
+                                        for="distancia_10km"
+                                        class="radio-label"
+                                    >
+                                        10 KM
+                                        <div
+                                            style="font-size: 0.875rem; margin-top: 0.25rem; opacity: 0.8;"
+                                        >
+                                            $15.000
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="price-display" id="priceDisplay">
+                            Total: $5.000
+                        </div>
+
+                        <div
+                            id="errorMessage"
+                            style="display: none;"
+                            class="alert alert-error"
+                        >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary btn-full"
+                            id="submitBtn"
+                        >
+                            <span id="btnText">Proceder al Pago</span>
+                            <span
+                                id="btnSpinner"
+                                style="display: none;"
+                                class="spinner"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            // Calcular edad automáticamente basado en fecha de nacimiento
+            const fechaNacimientoInput =
+                document.getElementById("fecha_nacimiento");
+            const edadInput = document.getElementById("edad");
+
+            fechaNacimientoInput.addEventListener("change", (e) => {
+                const fechaNacimiento = new Date(e.target.value);
+                const hoy = new Date();
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+                if (
+                    mes < 0 ||
+                    (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())
+                ) {
+                    edad--;
+                }
+
+                edadInput.value = edad;
+            });
+
+            // Actualizar precio según distancia seleccionada
+            const distanciaInputs = document.querySelectorAll(
+                'input[name="distancia"]',
+            );
+            const priceDisplay = document.getElementById("priceDisplay");
+
+            distanciaInputs.forEach((input) => {
+                input.addEventListener("change", (e) => {
+                    const price = e.target.value === "3km" ? "5.000" : "15.000";
+                    priceDisplay.textContent = `Total: $${price}`;
+                });
+            });
+
+            // Manejo del envío del formulario
+            const form = document.getElementById("inscripcionForm");
+            const submitBtn = document.getElementById("submitBtn");
+            const btnText = document.getElementById("btnText");
+            const btnSpinner = document.getElementById("btnSpinner");
+            const errorMessage = document.getElementById("errorMessage");
+
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                submitBtn.disabled = true;
+                btnText.style.display = "none";
+                btnSpinner.style.display = "inline-block";
+                errorMessage.style.display = "none";
+
+                try {
+                    const formData = new FormData(form);
+                    const data = {
+                        nombre_apellido: formData.get("nombre_apellido"),
+                        dni: formData.get("dni"),
+                        sexo: formData.get("sexo"),
+                        fecha_nacimiento: formData.get("fecha_nacimiento"),
+                        edad: parseInt(formData.get("edad")),
+                        team: formData.get("team") || null,
+                        ciudad: formData.get("ciudad"),
+                        distancia: formData.get("distancia"),
+                    };
+
+                    console.log("Enviando datos:", data);
+
+                    const response = await fetch("/api/create-payment", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(
+                            result.error || "Error al procesar el pago",
+                        );
+                    }
+
+                    // Redirigir a Mercado Pago
+                    window.location.href = result.init_point;
+                } catch (error) {
+                    console.error("Error:", error);
+                    errorMessage.textContent = error.message;
+                    errorMessage.style.display = "block";
+
+                    submitBtn.disabled = false;
+                    btnText.style.display = "inline";
+                    btnSpinner.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>

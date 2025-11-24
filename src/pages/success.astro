@@ -1,0 +1,69 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>¡Inscripción Exitosa! - Zenta Running</title>
+	</head>
+	<body>
+		<main>
+			<div class="container">
+				<div class="card fade-in" style="text-align: center;">
+					<div style="font-size: 4rem; margin-bottom: 1rem;">✅</div>
+					<h1>¡Pago Exitoso!</h1>
+					<p style="font-size: 1.2rem; margin-bottom: 2rem;">
+						Tu inscripción a Zenta Running ha sido confirmada
+					</p>
+
+					<div class="alert alert-success" style="text-align: left;">
+						<strong>¿Qué sigue?</strong>
+						<ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+							<li>Recibirás un email de confirmación</li>
+							<li>Tu número de corredor será enviado próximamente</li>
+							<li>Revisa tu email para más detalles del evento</li>
+						</ul>
+					</div>
+
+					<div id="paymentDetails" style="margin-top: 2rem;"></div>
+
+					<a href="/" class="btn btn-primary" style="margin-top: 2rem; text-decoration: none;">
+						Volver al inicio
+					</a>
+				</div>
+			</div>
+		</main>
+
+		<script>
+			const urlParams = new URLSearchParams(window.location.search);
+			const paymentId = urlParams.get('payment_id');
+			const collectionId = urlParams.get('collection_id');
+
+			if (paymentId || collectionId) {
+				const id = paymentId || collectionId;
+				
+				fetch(`/api/payment-status?payment_id=${id}`)
+					.then(response => response.json())
+					.then(data => {
+						const detailsDiv = document.getElementById('paymentDetails');
+						detailsDiv.innerHTML = `
+							<div style="background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: 12px;">
+								<h3 style="margin-bottom: 1rem; font-size: 1.2rem;">Detalles del Pago</h3>
+								<div style="display: grid; gap: 0.5rem; text-align: left;">
+									<div><strong>ID de Pago:</strong> ${data.payment_id}</div>
+									<div><strong>Monto:</strong> $${data.amount?.toLocaleString('es-AR')}</div>
+									<div><strong>Estado:</strong> <span class="badge">Aprobado</span></div>
+								</div>
+							</div>
+						`;
+					})
+					.catch(error => {
+						console.error('Error al obtener detalles:', error);
+					});
+			}
+		</script>
+	</body>
+</html>
