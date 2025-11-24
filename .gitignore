@@ -2,5 +2,4 @@
 *.md
 *.sh
 node_modules
-.astro
-.gitignore
+.astro/

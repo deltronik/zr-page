@@ -17,6 +17,9 @@
     "dotenv": "^16.4.7",
     "mercadopago": "^2.0.15"
   },
+  "overrides": {
+    "path-to-regexp": "^8.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/TU-USUARIO/zenta-running.git"

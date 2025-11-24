@@ -1,5 +1,5 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import { config } from '../../lib/config.js';
+import { MERCADOPAGO_ACCESS_TOKEN } from 'astro:env/server';
 
 const pendingPayments = new Map();
 
@@ -29,7 +29,7 @@ export async function POST({ request }) {
     const description = `Inscripción Zenta Running - ${distancia}`;
 
     const client = new MercadoPagoConfig({
-      accessToken: config.mercadoPago.accessToken,
+      accessToken: MERCADOPAGO_ACCESS_TOKEN,
     });
 
     const preference = new Preference(client);
