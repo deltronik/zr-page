@@ -1,11 +1,10 @@
-import 'dotenv/config';
 import { createClient } from '@libsql/client';
-import { config } from './config.js';
+import { TURSO_DATABASE_URL, TURSO_AUTH_TOKEN } from 'astro:env/server';
 
 // Inicializar cliente de Turso
 const turso = createClient({
-  url: config.turso.url,
-  authToken: config.turso.authToken,
+  url: TURSO_DATABASE_URL,
+  authToken: TURSO_AUTH_TOKEN,
 });
 
 // Inicializar tablas

@@ -1,10 +1,10 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
-import { config } from '../../lib/config.js';
+import { MERCADOPAGO_ACCESS_TOKEN } from 'astro:env/server';
 
 export async function GET({ url }) {
   try {
     const paymentId = url.searchParams.get('payment_id');
-    
+
     if (!paymentId) {
       return new Response(JSON.stringify({ error: 'payment_id requerido' }), {
         status: 400,
@@ -13,7 +13,7 @@ export async function GET({ url }) {
     }
 
     const client = new MercadoPagoConfig({
-      accessToken: config.mercadoPago.accessToken,
+      accessToken: MERCADOPAGO_ACCESS_TOKEN,
     });
 
     const payment = new Payment(client);
@@ -33,9 +33,9 @@ export async function GET({ url }) {
 
   } catch (error) {
     console.error('Error al obtener estado del pago:', error);
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       error: 'Error al obtener estado del pago',
-      details: error.message 
+      details: error.message
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }

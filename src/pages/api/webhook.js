@@ -1,12 +1,12 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { saveInscripcion, checkPaymentExists } from '../../lib/db.js';
 import { pendingPayments } from './create-payment.js';
-import { config } from '../../lib/config.js';
+import { MERCADOPAGO_ACCESS_TOKEN } from 'astro:env/server';
 
 export async function POST({ request }) {
   try {
     const body = await request.json();
-    
+
     console.log('Webhook recibido:', body);
 
     if (body.type !== 'payment') {
@@ -19,7 +19,7 @@ export async function POST({ request }) {
     const paymentId = body.data.id;
 
     const client = new MercadoPagoConfig({
-      accessToken: config.mercadoPago.accessToken,
+      accessToken: MERCADOPAGO_ACCESS_TOKEN,
     });
 
     const payment = new Payment(client);
@@ -30,7 +30,7 @@ export async function POST({ request }) {
 
     if (paymentInfo.status === 'approved') {
       const exists = await checkPaymentExists(paymentId.toString());
-      
+
       if (exists) {
         console.log('Pago ya procesado anteriormente');
         return new Response(JSON.stringify({ message: 'Pago ya procesado' }), {
@@ -40,9 +40,9 @@ export async function POST({ request }) {
       }
 
       const preferenceId = paymentInfo.metadata?.preference_id || paymentInfo.additional_info?.preference_id;
-      
+
       let formData = null;
-      
+
       if (preferenceId && pendingPayments.has(preferenceId)) {
         formData = pendingPayments.get(preferenceId);
         pendingPayments.delete(preferenceId);
@@ -50,8 +50,8 @@ export async function POST({ request }) {
 
       if (!formData) {
         console.error('No se encontraron datos del formulario para este pago');
-        return new Response(JSON.stringify({ 
-          error: 'No se encontraron datos del formulario' 
+        return new Response(JSON.stringify({
+          error: 'No se encontraron datos del formulario'
         }), {
           status: 400,
           headers: { 'Content-Type': 'application/json' }
@@ -73,9 +73,9 @@ export async function POST({ request }) {
 
   } catch (error) {
     console.error('Error en webhook:', error);
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       error: 'Error al procesar webhook',
-      details: error.message 
+      details: error.message
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
