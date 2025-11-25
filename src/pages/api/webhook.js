@@ -1,6 +1,10 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
-import { saveInscripcion, checkPaymentExists } from '../../lib/db.js';
-import { pendingPayments } from './create-payment.js';
+import {
+  saveInscripcion,
+  checkPaymentExists,
+  getPendingParticipant,
+  deletePendingParticipant
+} from '../../lib/db.js';
 import { MERCADOPAGO_ACCESS_TOKEN } from 'astro:env/server';
 
 export async function POST({ request }) {
@@ -41,12 +45,8 @@ export async function POST({ request }) {
 
       const preferenceId = paymentInfo.metadata?.preference_id || paymentInfo.additional_info?.preference_id;
 
-      let formData = null;
-
-      if (preferenceId && pendingPayments.has(preferenceId)) {
-        formData = pendingPayments.get(preferenceId);
-        pendingPayments.delete(preferenceId);
-      }
+      // Obtener datos del participante desde Turso (persistente en serverless)
+      const formData = await getPendingParticipant(preferenceId);
 
       if (!formData) {
         console.error('No se encontraron datos del formulario para este pago');
@@ -62,6 +62,9 @@ export async function POST({ request }) {
         ...formData,
         payment_id: paymentId.toString()
       });
+
+      // Eliminar de participantes pendientes después de guardar en tabla final
+      await deletePendingParticipant(preferenceId);
 
       console.log('Inscripción guardada exitosamente');
     }

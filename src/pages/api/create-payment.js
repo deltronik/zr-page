@@ -1,7 +1,6 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { MERCADOPAGO_ACCESS_TOKEN } from 'astro:env/server';
-
-const pendingPayments = new Map();
+import { savePendingParticipant } from '../../lib/db.js';
 
 export async function POST({ request }) {
   try {
@@ -56,18 +55,8 @@ export async function POST({ request }) {
 
     const result = await preference.create({ body: preferenceData });
 
-    pendingPayments.set(result.id, {
-      ...formData,
-      payment_preference_id: result.id,
-      created_at: new Date().toISOString()
-    });
-
-    const oneHourAgo = Date.now() - 3600000;
-    for (const [key, value] of pendingPayments.entries()) {
-      if (new Date(value.created_at).getTime() < oneHourAgo) {
-        pendingPayments.delete(key);
-      }
-    }
+    // Guardar participante pendiente en Turso (persistente en serverless)
+    await savePendingParticipant(result.id, formData);
 
     return new Response(JSON.stringify({
       init_point: result.init_point,
@@ -88,5 +77,3 @@ export async function POST({ request }) {
     });
   }
 }
-
-export { pendingPayments };
