@@ -1,0 +1,50 @@
+---
+const { url, text } = Astro.props;
+---
+
+<a href={url} class="rounded-md px-3 py-2 text-sm font-medium nav-link"
+    >{text}</a
+>
+<script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", (event) => {
+        // 1. Obtener todos los enlaces de navegación
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        // 2. Obtener la URL actual de la página
+        // window.location.pathname devuelve la parte del path de la URL (ej: "/acerca-de")
+        const currentPath = window.location.pathname;
+
+        // 3. Iterar sobre cada enlace
+        navLinks.forEach((link) => {
+            // 4. Obtener el valor del atributo href de cada enlace
+            const linkPath = link.getAttribute("href");
+
+            // 5. Comparar la URL actual con la URL del enlace
+            if (currentPath === linkPath) {
+                // 6. Si son iguales, añadir la clase de Tailwind para resaltarlo
+                // También puedes quitar cualquier otra clase que uses para el estado "activo" previo
+                link.classList.add(
+                    "bg-[#96cc23]",
+                    "text-gray-900",
+                    "font-bold",
+                );
+                // Opcional: añadir un color de texto contrastante si lo necesitas
+            } else {
+                // Opcional: si el enlace NO es el actual, asegúrate de que no tenga la clase activa
+                link.classList.remove(
+                    "bg-[#96cc23]",
+                    "text-gray-900",
+                    "font-bold",
+                );
+            }
+        });
+    });
+</script>
+<style>
+    a {
+        font-family: "Caveat";
+        font-size: 1.3rem;
+        font-weight: 800;
+    }
+</style>

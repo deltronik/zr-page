@@ -1,18 +1,13 @@
 ---
-import "../styles/global.css";
+import { envField } from "astro/config";
+import Base from "./../layouts/layout-base.astro";
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=<device-width>, initial-scale=1.0"
-        />
-        <title>Document</title>
-    </head>
-    <body>
-        <h1><a href="/inscripcion">Ir al registro</a></h1>
-    </body>
-</html>
+<Base
+    Title="ZentaRunning"
+    isIndex={true}
+    description="Web oficial de Zenta Running Team | calendario de ventos, carreras, ejercicios, rutinas, consejos y mas!"
+    baseUrl="https://zentas.run"
+>
+    <h1>Esto es el index</h1>
+</Base>

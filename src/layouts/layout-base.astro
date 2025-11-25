@@ -1,0 +1,41 @@
+---
+const { Title, isIndex, description, baseUrl } = Astro.props;
+import "./../styles/global.css";
+
+import Head from "./../components/head.astro";
+import Header from "./../components/header.astro";
+---
+
+<!doctype html>
+<html lang="es">
+    <Head title={Title} description={description} baseUrl={baseUrl}>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {
+            isIndex ? (
+                <title>{Title}</title>
+            ) : (
+                <title>ZentaRunning | {Title}</title>
+            )
+        }
+    </Head>
+    <body class="container mx-auto">
+        <Header isIndex={isIndex} />
+        <slot />
+    </body>
+</html>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh;
+        width: 100dvw;
+        max-width: 100dvw;
+        color-scheme: light dark;
+        background-color: light-dark(#fff, #000);
+        color: light-dark(#000, #fff);
+    }
+</style>
