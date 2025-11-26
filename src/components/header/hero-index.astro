@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import Logo from "./new-logo-white.png";
+---
+
+<section class="">
+    <div class="white-line">
+        <div class="title-site">
+            <h1><span>Zenta</span><span class="running">Running</span></h1>
+        </div>
+        <div class="logo-site">
+            <Image
+                src={Logo}
+                alt="Zenta Running Team logo, Z y R unidas pintadas sobre el asfalto"
+            />
+        </div>
+    </div>
+    <div class="event-timer">
+        <p>AQUI VA</p>
+    </div>
+    <style>
+        section {
+            background-color: #1c1c1c;
+            width: 100dvw;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .white-line {
+                background-image: url("img/whiteLine1.png");
+                background-size: 105% 100%;
+                position: absolute;
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+                align-items: center;
+                right: 0;
+                height: 10rem;
+                width: 80%;
+                .title-site {
+                    height: 90%;
+                    margin-inline-end: 10px;
+                    h1 {
+                        justify-content: center;
+                        height: 100%;
+                        max-width: 40%;
+                        display: flex;
+                        flex-direction: column;
+                        color: #1c1c1c;
+                        font-family: "Gantari";
+                        font-weight: 800;
+                        line-height: 0.8;
+                        font-size: 2.4rem;
+                        .running {
+                            color: #96cc23;
+                        }
+                    }
+                }
+                .logo-site {
+                    height: 80%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    max-width: 30%;
+                    margin-inline-end: 2px;
+                    img {
+                        height: 5rem;
+                        width: 5rem;
+                        padding-block-end: 10px;
+                    }
+                }
+            }
+            .event-timer {
+                position: absolute;
+                bottom: 20px;
+                width: 90%;
+                text-align: center;
+                font-family: "Caveat";
+                color: white;
+                font-size: 1rem;
+                span {
+                    color: #96cc23;
+                }
+            }
+        }
+    </style>
+</section>

@@ -4,9 +4,9 @@ import ItemM from "./a-mobil.astro";
 ---
 
 <nav
-    class="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10"
+    class="relative after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-gray-200 dark:after:bg-gray-800"
 >
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-7">
         <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
@@ -94,6 +94,11 @@ import ItemM from "./a-mobil.astro";
 <style>
     nav {
         background-color: light-dark(#fff, #000);
+        position: fixed;
+        width: 100dvw;
+        z-index: 100;
+        top: 0;
+        left: 0;
     }
     .zenta {
         font-family: "Gantari";

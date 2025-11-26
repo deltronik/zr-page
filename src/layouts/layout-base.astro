@@ -4,6 +4,7 @@ import "./../styles/global.css";
 
 import Head from "./../components/head.astro";
 import Header from "./../components/header.astro";
+import Footer from "./../components/footer.astro";
 ---
 
 <!doctype html>
@@ -20,9 +21,12 @@ import Header from "./../components/header.astro";
             )
         }
     </Head>
-    <body class="container mx-auto">
+    <body>
         <Header isIndex={isIndex} />
-        <slot />
+        <main>
+            <slot />
+        </main>
+        <Footer />
     </body>
 </html>
 <style>
@@ -31,11 +35,15 @@ import Header from "./../components/header.astro";
         padding: 0;
         display: flex;
         flex-direction: column;
-        min-height: 100dvh;
-        width: 100dvw;
-        max-width: 100dvw;
+        min-height: 100%;
+        width: 100%;
         color-scheme: light dark;
         background-color: light-dark(#fff, #000);
         color: light-dark(#000, #fff);
+    }
+
+    main {
+        flex: 1;
+        min-height: 4rem;
     }
 </style>

@@ -1,8 +1,16 @@
 ---
 const { isIndex } = Astro.props;
 import Nav from "./header/nav.astro";
+import HeroIndex from "./header/hero-index.astro";
 ---
 
 <header>
     <Nav />
+    {
+        isIndex ? (
+            <HeroIndex />
+        ) : (
+            <></>
+        )
+    }
 </header>
