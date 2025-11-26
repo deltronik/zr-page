@@ -3,3 +3,7 @@
 *.sh
 node_modules
 .astro/
+migrate-participantes.js
+test-turso.js
+test-mercadopago.js
+update-tables-sexo.js
