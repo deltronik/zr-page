@@ -26,6 +26,10 @@ export default defineConfig({
                 context: 'server',
                 access: 'secret',
             }),
+            MERCADOPAGO_WEBHOOK_SECRET: envField.string({
+                context: 'server',
+                access: 'secret',
+            }),
         }
     }
 });
